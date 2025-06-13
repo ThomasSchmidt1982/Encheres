@@ -4,12 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -38,6 +34,12 @@ public class EnchereSecurityConfig {
         jdbcUserDetailsManager.setUsersByUsernameQuery(SELECT_USER);
         jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(SELECT_ROLES);
         return jdbcUserDetailsManager;
+    }
+
+    // encodage du mot de passe
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     // processus de connexion
@@ -69,35 +71,18 @@ public class EnchereSecurityConfig {
                         .permitAll()
                 );
 
+        // logout personnalisé
+        http.logout(logout -> {
+            logout	.invalidateHttpSession(true)
+                    .clearAuthentication(true)
+                    .deleteCookies("JSESSIONID")
+                    .logoutRequestMatcher((request) -> request.getRequestURI().equals("/logout"))
+                    .logoutSuccessUrl("/")
+                    .permitAll();
+        });
+
+
         return http.build();
     }
-
-
-
-    /*****************************/
-    // gestion du cryptage des mdp
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-//
-    // gestion des mots de passe
-    // @Bean
-//    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
-//        UserDetails sgobin = User.builder()
-//                .username("sgobin@campus-eni.fr")
-//                .password(passwordEncoder.encode("sg"))
-//                .roles("ADMIN")
-//                .build();
-//
-//        UserDetails tschmidt = User.builder()
-//                .username("tschmidt@campus-eni.fr")
-//                .password(passwordEncoder.encode("ts"))
-//                .roles("ADMIN")
-//                .build();
-//
-//        // stockage mémoire des infos utilisateurs
-//        return new InMemoryUserDetailsManager(sgobin, tschmidt);
-//    }
 
 }

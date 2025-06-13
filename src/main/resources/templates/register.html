@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr"
+      data-th-replace="~{layouts/layout :: layout-enchere(titrePage=~{:: title},
+	 contenuPage=~{:: main}, ressourcesSupp=~{:: #ressources-css})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title data-th-text="#{register.title}"></title>
+
+    <th:block id="ressources-css">
+        <link data-th-href="@{/css/form.css}" rel="stylesheet" />
+        <link data-th-href="@{/css/error.css}" rel="stylesheet" />
+    </th:block>
+
+</head>
+
+<body>
+<main>
+<form data-th-action="@{/register}" method="post" class="form-container">
+    <div class="form-columns">
+        <!-- Colonne gauche -->
+        <div class="column-left">
+            <ul class="flex-outer">
+                <li>
+                    <label for="pseudo" data-th-text="#{register.pseudo}">Pseudo</label>
+                    <input type="text" id="pseudo" name="pseudo" required />
+                </li>
+                <li>
+                    <label for="prenom" data-th-text="#{register.prenom}">Prénom</label>
+                    <input type="text" id="prenom" name="prenom" required />
+                </li>
+                <li>
+                    <label for="telephone" data-th-text="#{register.telephone}">Téléphone</label>
+                    <input type="tel" id="telephone" name="telephone" required />
+                </li>
+                <li>
+                    <label data-th-text="#{register.adresse}">Adresse</label>
+                    <div class="address-fields">
+                        <input type="text" id="rue" name="rue" placeholder="Rue" required />
+                        <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" required />
+                        <input type="text" id="ville" name="ville" placeholder="Ville" required />
+                    </div>
+                </li>
+                <li>
+                    <label for="motDePasse" data-th-text="#{register.password}">Mot de passe</label>
+                    <input type="password" id="motDePasse" name="motDePasse" required />
+                </li>
+                <li>
+                    <label for="confirmation" data-th-text="#{register.confirmation}">Confirmation</label>
+                    <input type="password" id="confirmation" name="confirmation" required />
+                </li>
+            </ul>
+        </div>
+
+        <!-- Colonne droite -->
+        <div class="column-right">
+            <ul class="flex-outer">
+                <li>
+                    <label for="nom" data-th-text="#{register.nom}">Nom</label>
+                    <input type="text" id="nom" name="nom" required />
+                </li>
+                <li>
+                    <label for="email" data-th-text="#{register.email}">Email</label>
+                    <input type="email" id="email" name="email" required />
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Boutons -->
+    <div class="button-group">
+        <button type="submit" data-th-text="#{register.button.submit}">Créer</button>
+        <a data-th-href="@{/}" class="button" data-th-text="#{register.button.cancel}">Annuler</a>
+    </div>
+</form>
+</main>
+</body>
+</html>

@@ -1,14 +1,14 @@
 <!-- Navbar -->
-<header xmlns:th="http://www.thymeleaf.org" th:fragment="frag-entete">
+<header xmlns:th="http://www.thymeleaf.org" data-th-fragment="frag-entete">
 
 
 	<section id="nav-title">
 	
 		<h1>
 			<a href="/">
-				<img th:src="@{/images/logoEnchere.png}" alt="(Logo)Eni-Encheres" width="100" height="100"
+				<img data-th-src="@{/images/logoEnchere.png}" alt="(Logo)Eni-Encheres" width="100" height="100"
 					class="logo-img">
-				<span th:text="#{nom-application}"></span>
+				<span data-th-text="#{nom-application}"></span>
 			</a>
 		</h1>
 		
@@ -18,13 +18,22 @@
 	<nav>
 		<ul>
 			<li>
-				<a href="/" th:text="#{frag-entete.a.accueil}"></a>
+				<a href="/" data-th-text="#{frag-entete.a.accueil}"></a>
 			</li>
 
-			<!-- Lien de connexion/login -->
-			<li>
-				<a href="/login" th:text="#{frag-entete.a.connexion}"></a>
+<!--			&lt;!&ndash; Lien de connexion/login &ndash;&gt;-->
+<!--			<li>-->
+<!--				<a href="/login" data-th-text="#{frag-entete.a.connexion}"></a>-->
+<!--			</li>-->
+
+			<!-- Afficher soit Connexion soit Déconnexion selon l'état de l'authentification -->
+			<li data-th-if="${#authorization.expression('isAuthenticated()')}">
+				<a href="/logout" data-th-text="#{frag-entete.a.deconnexion}"></a>
 			</li>
+			<li data-th-unless="${#authorization.expression('isAuthenticated()')}">
+				<a href="/login" data-th-text="#{frag-entete.a.connexion}"></a>
+			</li>
+
 
 		</ul>
 	</nav>

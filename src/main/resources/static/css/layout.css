@@ -9,7 +9,7 @@ body {
 
 header {
 	padding: 5px;
-	background-color: #777;
+	background-color: #2d6abf;
 }
 
 h1 {
@@ -17,7 +17,7 @@ h1 {
 }
 
 footer {
-	background-color: #777;
+	background-color: #2d6abf;
 	padding: 10px;
 	text-align: center;
 	color: white;
