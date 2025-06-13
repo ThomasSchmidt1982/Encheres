@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr"
+	  th:replace="~{layouts/layout :: layout-enchere(titrePage=~{:: title}, contenuPage=~{:: main}, ressourcesSupp=~{})}"
+	  xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+
+<title th:text="#{index.title}">page index</title>
+
+</head>
+
+<body>
+
+	<main class="center-main">
+		<section class="center-section">
+			<h1 style="text-align: center;" th:text="#{index.h1}">main index</h1>
+		</section>
+	</main>
+
+</body>
+
+</html>
