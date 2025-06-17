@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class ArticleAVendre {
 
     private long id;
-    private String nom;
+    private String nomArticle;
     private String description;
     private LocalDate dateDebutEncheres;
     private LocalDate dateFinEncheres;
@@ -16,13 +16,14 @@ public class ArticleAVendre {
     private Adresse retrait;
     private Categorie categorie;
 
+
     // constructeur par defaut
     public ArticleAVendre() {}
 
     // constructeur avec champs
-    public ArticleAVendre(long id, String nom, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, int statut, int prixInitial, int prixVente, Utilisateur vendeur, Adresse retrait, Categorie categorie) {
+    public ArticleAVendre(long id, String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, int statut, int prixInitial, int prixVente, Utilisateur vendeur, Adresse retrait, Categorie categorie) {
         this.id = id;
-        this.nom = nom;
+        this.nomArticle = nomArticle;
         this.description = description;
         this.dateDebutEncheres = dateDebutEncheres;
         this.dateFinEncheres = dateFinEncheres;
@@ -41,12 +42,12 @@ public class ArticleAVendre {
         this.id = id;
     }
 
-    public String getNom() {
-        return nom;
+    public String getNomArticle() {
+        return nomArticle;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setNomArticle(String nomArticle) {
+        this.nomArticle = nomArticle;
     }
 
     public String getDescription() {
@@ -126,7 +127,7 @@ public class ArticleAVendre {
     public String toString() {
         final StringBuilder sb = new StringBuilder("ArticleAVendre{");
         sb.append("id=").append(id);
-        sb.append(", nom='").append(nom).append('\'');
+        sb.append(", nom='").append(nomArticle).append('\'');
         sb.append(", description='").append(description).append('\'');
         sb.append(", dateDebutEncheres=").append(dateDebutEncheres);
         sb.append(", dateFinEncheres=").append(dateFinEncheres);

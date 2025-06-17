@@ -1,14 +1,42 @@
 package fr.eni.projet.encheres.bo;
 
+import jakarta.validation.constraints.*;
+import org.springframework.beans.factory.annotation.Value;
+
 public class Utilisateur {
 
+    @NotBlank(message = "validation.utilisateur.pseudo.notblank")
+    @Pattern(regexp = "^[a-zA-Z0-9_]+$", message = "validation.utilisateur.pseudo.pattern")
+    @Size(max = 30, message = "validation.utilisateur.pseudo.max")
     private String pseudo;
+
+    @NotBlank(message = "validation.utilisateur.nom.notblank")
+    @Size(max = 40, message = "validation.utilisateur.nom.max")
     private String nom;
+
+    @NotBlank(message = "validation.utilisateur.prenom.notblank")
+    @Size(max=50, message = "validation.utilisateur.prenom.max")
     private String prenom;
+
+    @Email
+    @NotBlank(message = "validation.utilisateur.email.notblank")
+    @Size(max = 100, message = "validation.utilisateur.email.max")
+    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$", message = "validation.utilisateur.email.pattern")
     private String email;
+
+    @Size(max = 15, message = "validation.utilisateur.telephone.max")
     private String telephone;
+
+    @NotBlank(message = "validation.utilisateur.motDePasse.notblank")
+    @Size(min = 8, max = 20, message = "validation.utilisateur.motDePasse.size")
+    @Pattern(regexp = "[A-Za-z\\d@$!%*?&]{8,20}", message = "validation.utilisateur.motDePasse.pattern")
+    private String motDePasse;
+
     private int credit;
+
     private boolean admin;
+
+    @NotNull(message = "validation.utilisateur.adresse.notnull")
     private Adresse adresse;
 
     // Constructeur par defaut
@@ -16,7 +44,7 @@ public class Utilisateur {
     }
 
     // Constructeur avec Champs
-    public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, int credit, boolean admin, Adresse adresse) {
+    public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, int credit, boolean admin, Adresse adresse, String motDePasse) {
         this.pseudo = pseudo;
         this.nom = nom;
         this.prenom = prenom;
@@ -25,6 +53,7 @@ public class Utilisateur {
         this.credit = credit;
         this.admin = admin;
         this.adresse = adresse;
+        this.motDePasse = motDePasse;
     }
 
     // getters & setters
@@ -104,7 +133,16 @@ public class Utilisateur {
         sb.append(", credit=").append(credit);
         sb.append(", admin=").append(admin);
         sb.append(", adresse=").append(adresse);
+        sb.append(", motDePasse='").append(motDePasse).append('\'');
         sb.append('}');
         return sb.toString();
+    }
+
+    public String getMotDePasse() {
+        return motDePasse;
+    }
+
+    public void setMotDePasse(String motDePasse) {
+        this.motDePasse = motDePasse;
     }
 }

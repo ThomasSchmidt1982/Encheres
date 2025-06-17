@@ -8,71 +8,168 @@
     <title data-th-text="#{register.title}"></title>
 
     <th:block id="ressources-css">
-        <link data-th-href="@{/css/form.css}" rel="stylesheet" />
-        <link data-th-href="@{/css/error.css}" rel="stylesheet" />
+        <link data-th-href="@{/css/form.css}" rel="stylesheet"/>
+        <link data-th-href="@{/css/error.css}" rel="stylesheet"/>
     </th:block>
 
 </head>
 
 <body>
 <main>
-<form data-th-action="@{/register}" method="post" class="form-container">
-    <div class="form-columns">
-        <!-- Colonne gauche -->
-        <div class="column-left">
-            <ul class="flex-outer">
-                <li>
-                    <label for="pseudo" data-th-text="#{register.pseudo}">Pseudo</label>
-                    <input type="text" id="pseudo" name="pseudo" required />
-                </li>
-                <li>
-                    <label for="prenom" data-th-text="#{register.prenom}">Prénom</label>
-                    <input type="text" id="prenom" name="prenom" required />
-                </li>
-                <li>
-                    <label for="telephone" data-th-text="#{register.telephone}">Téléphone</label>
-                    <input type="tel" id="telephone" name="telephone" required />
-                </li>
-                <li>
-                    <label data-th-text="#{register.adresse}">Adresse</label>
-                    <div class="address-fields">
-                        <input type="text" id="rue" name="rue" placeholder="Rue" required />
-                        <input type="text" id="codePostal" name="codePostal" placeholder="Code Postal" required />
-                        <input type="text" id="ville" name="ville" placeholder="Ville" required />
-                    </div>
-                </li>
-                <li>
-                    <label for="motDePasse" data-th-text="#{register.password}">Mot de passe</label>
-                    <input type="password" id="motDePasse" name="motDePasse" required />
-                </li>
-                <li>
-                    <label for="confirmation" data-th-text="#{register.confirmation}">Confirmation</label>
-                    <input type="password" id="confirmation" name="confirmation" required />
-                </li>
-            </ul>
+    <form data-th-action="@{/register}" method="post" class="form-container" data-th-object="${utilisateur}">
+        <h1 data-th-text="#{register.h1}"></h1>
+
+        <!--si erreur alors affichage d'erreur générique-->
+        <th:block data-th-if="${#fields.hasErrors('global')}">
+            <div data-th-replace="~{fragments/errors/fragment-errors :: frag-errors}"></div>
+        </th:block>
+
+        <div class="form-columns">
+            <!-- Colonne gauche -->
+            <div class="column-left">
+                <ul class="flex-outer">
+                    <li>
+                        <!--Pour le pseudo-->
+                        <label for="pseudo" data-th-text="#{register.pseudo}">Pseudo</label>
+                        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('pseudo')}"></div>
+                        <input type="text" data-th-field="*{pseudo}" id="pseudo" name="pseudo" required/>
+                    </li>
+                    <li>
+                        <!-- Pour le prénom -->
+                        <label for="prenom" data-th-fieldtext="#{register.prenom}">Prénom</label>
+                        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('prenom')}"></div>
+                        <input type="text" data-th-field="*{prenom}" id="prenom" name="prenom" required/>
+                    </li>
+                    <li>
+                        <!-- Pour le téléphone -->
+                        <label for="telephone" data-th-text="#{register.telephone}">Téléphone</label>
+                        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('telephone')}"></div>
+                        <input type="tel" data-th-field="*{telephone}" id="telephone" name="telephone" required/>
+                    </li>
+                    <li>
+                        <!-- Pour l' adresse -->
+                        <label data-th-text="#{register.adresse}">Adresse</label>
+                        <div class="address-fields">
+                            <input type="text" data-th-field="*{adresse.rue}" id="rue" name="rue" placeholder="Rue"
+                                   required/>
+                            <input type="text" data-th-field="*{adresse.codePostal}" id="codePostal" name="codePostal"
+                                   placeholder="Code Postal" required/>
+                            <input type="text" data-th-field="*{adresse.ville}" id="ville" name="ville"
+                                   placeholder="Ville" required/>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- Pour le mot de passe -->
+                        <label for="motDePasse" data-th-text="#{register.password}">Mot de passe</label>
+                        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('motDePasse')}"></div>
+                        <input type="password" data-th-field="*{motDePasse}" id="motDePasse" name="motDePasse"
+                               required/>
+                    </li>
+                    <li>
+                        <label for="confirmation" data-th-text="#{register.confirmation}">Confirmation</label>
+                        <input type="password" id="confirmation" name="confirmation" required/>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Colonne droite -->
+            <div class="column-right">
+                <ul class="flex-outer">
+                    <li>
+                        <!-- Pour le nom -->
+                        <label for="nom" data-th-text="#{register.nom}">Nom</label>
+                        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('nom')}"></div>
+                        <input type="text" data-th-field="*{nom}" id="nom" name="nom" required/>
+                    </li>
+                    <li>
+                        <!-- Pour le email -->
+                        <label for="email" data-th-text="#{register.email}">Email</label>
+                        <div data-th-replace="~{fragments/errors/fragment-error :: frag-error('email')}"></div>
+                        <input type="email" data-th-field="*{email}" id="email" name="email" required/>
+                    </li>
+                </ul>
+            </div>
         </div>
 
-        <!-- Colonne droite -->
-        <div class="column-right">
-            <ul class="flex-outer">
-                <li>
-                    <label for="nom" data-th-text="#{register.nom}">Nom</label>
-                    <input type="text" id="nom" name="nom" required />
-                </li>
-                <li>
-                    <label for="email" data-th-text="#{register.email}">Email</label>
-                    <input type="email" id="email" name="email" required />
-                </li>
-            </ul>
+        <!-- Boutons -->
+        <div class="button-group">
+            <button type="submit" data-th-text="#{register.button.submit}">Créer</button>
+            <a data-th-href="@{/}" class="button" data-th-text="#{register.button.cancel}">Annuler</a>
         </div>
-    </div>
 
-    <!-- Boutons -->
-    <div class="button-group">
-        <button type="submit" data-th-text="#{register.button.submit}">Créer</button>
-        <a data-th-href="@{/}" class="button" data-th-text="#{register.button.cancel}">Annuler</a>
-    </div>
-</form>
+        <script th:inline="javascript">
+            document.addEventListener('DOMContentLoaded', function() {
+                const form = document.querySelector('.form-container');
+                const motDePasse = document.getElementById('motDePasse');
+                const confirmation = document.getElementById('confirmation');
+                const errorDiv = document.createElement('div');
+                errorDiv.style.color = 'red';
+                errorDiv.style.marginTop = '5px';
+
+                // Pattern du mot de passe
+                const passwordPattern = /^[A-Za-z\d@$!%*?&]{8,20}$/;
+
+                // Ajout du conteneur d'erreur après le champ de confirmation
+                confirmation.parentNode.appendChild(errorDiv);
+
+                // Fonction de vérification du pattern du mot de passe
+                function verifierPattern(value) {
+                    return passwordPattern.test(value);
+                }
+
+                // Fonction de vérification des mots de passe
+                function verifierMotsDePasse() {
+                    if (!verifierPattern(motDePasse.value)) {
+                        errorDiv.textContent = 'Le mot de passe doit contenir entre 8 et 20 caractères (lettres, chiffres et @$!%*?&)';
+                        motDePasse.style.borderColor = 'red';
+                        return;
+                    }
+
+                    if (confirmation.value === '') {
+                        errorDiv.textContent = '';
+                        confirmation.style.borderColor = '';
+                        motDePasse.style.borderColor = 'green';
+                    } else if (confirmation.value === motDePasse.value) {
+                        errorDiv.textContent = '';
+                        confirmation.style.borderColor = 'green';
+                        motDePasse.style.borderColor = 'green';
+                    } else {
+                        errorDiv.textContent = 'Les mots de passe ne correspondent pas';
+                        confirmation.style.borderColor = 'red';
+                        motDePasse.style.borderColor = 'green';
+                    }
+                }
+
+                // Validation lors de la soumission
+                form.addEventListener('submit', function(e) {
+                    if (!verifierPattern(motDePasse.value)) {
+                        e.preventDefault();
+                        errorDiv.textContent = 'Le mot de passe doit contenir entre 8 et 20 caractères (lettres, chiffres et @$!%*?&)';
+                        motDePasse.style.borderColor = 'red';
+                        return false;
+                    }
+
+                    if (motDePasse.value !== confirmation.value) {
+                        e.preventDefault();
+                        errorDiv.textContent = 'Les mots de passe ne correspondent pas';
+                        confirmation.style.borderColor = 'red';
+                        return false;
+                    }
+
+                    errorDiv.textContent = '';
+                    confirmation.style.borderColor = '';
+                    return true;
+                });
+
+                // Vérification en temps réel pour les deux champs
+                confirmation.addEventListener('input', verifierMotsDePasse);
+                motDePasse.addEventListener('input', verifierMotsDePasse);
+            });
+
+        </script>
+
+
+    </form>
 </main>
 </body>
 </html>

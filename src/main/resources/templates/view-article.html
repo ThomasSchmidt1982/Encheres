@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	data-th-replace="~{layouts/layout :: layout-enchere(titrePage=~{:: title}, contenuPage=~{:: main}, ressourcesSupp=~{:: #ressources-css})}">
+
+<head>
+
+<title>Article</title>
+
+<!-- Css spécifique à cette page // il sera ajouté dans le layout -->
+<th:block id="ressources-css">
+	<link rel="stylesheet" data-th-href="@{/css/demo-table.css}">
+</th:block>
+
+</head>
+<body>
+	<main>
+		<h1>Voici la liste des Articles aux enchères</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>Nom</th>
+					<th>Description</th>
+					<th>Statut de l'enchère</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- genre de foreach de java-->
+				<tr data-th-each="articleAVendre : ${articleAV}">
+					<td data-th-text="${articleAVendre.nomArticle}"></td>
+					<td data-th-text="${articleAVendre.description}"></td>
+					<td data-th-text="${articleAVendre.statut.libelle}">0 (non commencée), 1 (en cours), 2 (clôturée), 3 (livrée), 100 (annulée) </td>
+
+				</tr>
+			</tbody>
+		</table>
+	</main>
+</body>
+</html>

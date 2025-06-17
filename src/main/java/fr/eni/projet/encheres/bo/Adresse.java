@@ -1,10 +1,21 @@
 package fr.eni.projet.encheres.bo;
 
+import jakarta.validation.constraints.*;
+
 public class Adresse {
 
     private long id;
+
+    @NotBlank
+    @Max(100)
     private String rue;
+
+    @NotBlank
+    @Max(10)
     private String codePostal;
+
+    @NotBlank
+    @Max(50)
     private String ville;
 
     // Constructeur par defaut

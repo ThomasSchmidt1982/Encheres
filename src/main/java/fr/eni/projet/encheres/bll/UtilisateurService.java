@@ -10,8 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Set;
 @Service
 @Transactional
-public class UtilisateurService {
+public interface UtilisateurService {
 
+ public void creerCompte(Utilisateur utilisateur);
 
+ 
 
 }

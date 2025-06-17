@@ -36,12 +36,6 @@ public class EnchereSecurityConfig {
         return jdbcUserDetailsManager;
     }
 
-    // encodage du mot de passe
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
     // processus de connexion
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -51,6 +45,7 @@ public class EnchereSecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers(
                                 "/",
+                                "Index",
                                 "/home",
                                 "/register",
                                 "/css/**",
