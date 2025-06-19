@@ -17,11 +17,11 @@ import javax.sql.DataSource;
 public class EnchereSecurityConfig {
 
     // script SQL qui recupère les infos d'authentification de l'utilisateur email et password hashé le 1 signifie activé
-    private static final String SELECT_USER = "SELECT email, mot_de_passe, 1 FROM utilisateurs WHERE email = ? ";
+    private static final String SELECT_USER = "SELECT pseudo, mot_de_passe, 1 FROM utilisateurs WHERE pseudo = ? ";
 
     // script SQL avec jointure qui lie la table roles et membres par la colonne is_admin et admin
-    private static final String SELECT_ROLES = "SELECT u.email, r.role FROM utilisateurs u INNER JOIN roles r "
-                                                + " ON r.is_admin = u.administrateur WHERE u.email = ? ";
+    private static final String SELECT_ROLES = "SELECT u.pseudo, r.role FROM utilisateurs u INNER JOIN roles r "
+                                                + " ON r.is_admin = u.administrateur WHERE u.pseudo = ? ";
 
     /**    - méthode qui crée un gestionnaire d'utilisateurs
         - prend en paramètre une source de données (DataSource) qui sera injectée par Spring
@@ -45,13 +45,14 @@ public class EnchereSecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers(
                                 "/",
-                                "Index",
-                                "/home",
+                                "index",
                                 "/register",
                                 "/css/**",
                                 "/images/**",
                                 "login").permitAll() // en acces libre
 
+                        .requestMatchers(
+                                "/creer-article.html").authenticated()
                         .anyRequest().authenticated()   // pour tout le reste acces authentifié
                 )
 
@@ -61,7 +62,7 @@ public class EnchereSecurityConfig {
                         .loginProcessingUrl("/login")  // URL de traitement du formulaire
                         .usernameParameter("username") // nom du champ HTML pour le nom d'utilisateur
                         .passwordParameter("password") // nom du champ HTML pour le mot de passe
-                        .defaultSuccessUrl("/")    // redirection après connexion réussie
+                        .defaultSuccessUrl("/", true)    // redirection après connexion réussie
                         .failureUrl("/login?error=true") // redirection en cas d'échec
                         .permitAll()
                 );

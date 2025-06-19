@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class RegisterController {
-//@SessionAttributes({"utilisateur"})
 
     private UtilisateurService utilisateurService;
 
+    //constructeur
     public RegisterController(UtilisateurService utilisateurService) {
         this.utilisateurService = utilisateurService;
     }

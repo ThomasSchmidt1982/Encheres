@@ -1,19 +1,43 @@
 package fr.eni.projet.encheres.bo;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDate;
 
 public class ArticleAVendre {
 
+
     private long id;
+
+    @NotBlank(message = "validation.article.nom.notblank")
+    @Size(max = 30, message = "validation.article.nom.max")
     private String nomArticle;
+
+    @NotBlank(message = "validation.article.description.notblank")
+    @Size(max = 300, message = "validation.article.description.max")
     private String description;
+
+    //photo
+
+    @NotNull(message = "validation.article.dateDebutEncheres.notNull")
     private LocalDate dateDebutEncheres;
+
+    @NotNull(message = "validation.article.dateFinEncheres.notNull")
     private LocalDate dateFinEncheres;
+
     private int statut;
+
+    @NotNull(message = "validation.article.prixInitial.notNull")
     private int prixInitial;
+
     private int prixVente;
+
     private Utilisateur vendeur;
+
     private Adresse retrait;
+
     private Categorie categorie;
 
 

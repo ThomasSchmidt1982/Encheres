@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<header xmlns:th="http://www.thymeleaf.org" data-th-fragment="frag-entete">
+<header xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" data-th-fragment="frag-entete">
 
 
 	<section id="nav-title">
@@ -11,7 +11,15 @@
 				<span data-th-text="#{nom-application}"></span>
 			</a>
 		</h1>
-		
+
+		<div class="user-info" sec:authorize="isAuthenticated()">
+			<span sec:authentication="name"></span>
+		</div>
+
+		<div>
+		<span id="date"></span>
+		</div>
+
 	</section>
 
 
@@ -21,15 +29,22 @@
 				<a href="/" data-th-text="#{frag-entete.a.accueil}"></a>
 			</li>
 
-<!--			&lt;!&ndash; Lien de connexion/login &ndash;&gt;-->
-<!--			<li>-->
-<!--				<a href="/login" data-th-text="#{frag-entete.a.connexion}"></a>-->
-<!--			</li>-->
+			<!-- Afficher soit Profil soit 'rien' selon l'état de l'authentification -->
+			<li data-th-if="${#authorization.expression('isAuthenticated()')}">
+			<a href="/view-profil">Profil</a>
+			</li>
+
+			<!-- Afficher soit Vendre soit 'rien' selon l'état de l'authentification -->
+			<li data-th-if="${#authorization.expression('isAuthenticated()')}">
+				<a href="/creer-article">Vendre</a>
+			</li>
+
 
 			<!-- Afficher soit Connexion soit Déconnexion selon l'état de l'authentification -->
 			<li data-th-if="${#authorization.expression('isAuthenticated()')}">
 				<a href="/logout" data-th-text="#{frag-entete.a.deconnexion}"></a>
 			</li>
+
 			<li data-th-unless="${#authorization.expression('isAuthenticated()')}">
 				<a href="/login" data-th-text="#{frag-entete.a.connexion}"></a>
 			</li>
@@ -37,5 +52,29 @@
 
 		</ul>
 	</nav>
+
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			const dateElement = document.getElementById('date');
+			const options = {
+				weekday: 'long',
+				year: 'numeric',
+				month: 'long',
+				day: 'numeric'
+			};
+
+			function updateDate() {
+				const maintenant = new Date();
+				dateElement.textContent = maintenant.toLocaleDateString('fr-FR', options);
+			}
+
+			updateDate(); // Affichage initial
+
+			// Mise à jour quotidienne
+			setInterval(updateDate, 86400000);
+		});
+	</script>
+
 
 </header>

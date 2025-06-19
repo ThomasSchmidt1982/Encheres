@@ -10,6 +10,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class UtilisateurServiceImpl implements UtilisateurService{
 
@@ -38,6 +40,15 @@ private AdresseDAO adresseDAO;
             throw be;
         }
 
+    }
+
+    @Override
+    public Utilisateur consulterUtilisateur(String pseudo) {
+            try {
+                return utilisateurDAO.findByPseudo(pseudo);
+            } catch (DataAccessException e) {
+                throw new BusinessException(e);
+            }
     }
 
     /***** Pseudo unique ******/

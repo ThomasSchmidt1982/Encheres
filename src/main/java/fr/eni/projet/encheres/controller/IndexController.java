@@ -23,10 +23,10 @@ public class IndexController {
 
     @GetMapping("/")
     public String afficherArticle(Model model) {
-        List<ArticleAVendre> articleAVendre = articleAVendreService.consulterArticles();
+        List<ArticleAVendre> articleAVendreActif = articleAVendreService.consulterArticlesActifs();
         // Ajouter des données pour la page d'accueil
-        model.addAttribute("articleAV", articleAVendre);
-        System.out.println(articleAVendre);
+        model.addAttribute("articleAV", articleAVendreActif);
+        System.out.println(articleAVendreActif);
         return "view-article";
     }
 }

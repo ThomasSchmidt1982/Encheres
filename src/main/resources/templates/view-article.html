@@ -8,7 +8,9 @@
 
 <!-- Css spécifique à cette page // il sera ajouté dans le layout -->
 <th:block id="ressources-css">
-	<link rel="stylesheet" data-th-href="@{/css/demo-table.css}">
+	<link rel="stylesheet" data-th-href="@{/css/table.css}">
+	<link rel="stylesheet" data-th-href="@{/css/form.css}">
+	<link rel="stylesheet" data-th-href="@{/css/card.css}">
 </th:block>
 
 </head>
@@ -20,7 +22,10 @@
 				<tr>
 					<th>Nom</th>
 					<th>Description</th>
-					<th>Statut de l'enchère</th>
+					<th>Statut</th>
+					<th>Debut</th>
+					<th>Fin</th>
+					<th>Prix initial</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -28,11 +33,41 @@
 				<tr data-th-each="articleAVendre : ${articleAV}">
 					<td data-th-text="${articleAVendre.nomArticle}"></td>
 					<td data-th-text="${articleAVendre.description}"></td>
-					<td data-th-text="${articleAVendre.statut.libelle}">0 (non commencée), 1 (en cours), 2 (clôturée), 3 (livrée), 100 (annulée) </td>
-
+					<td data-th-text="${articleAVendre.statut}">0 (non commencée), 1 (en cours), 2 (clôturée), 3 (livrée), 100 (annulée) </td>
+					<td data-th-text="${articleAVendre.dateDebutEncheres}"></td>
+					<td data-th-text="${articleAVendre.dateFinEncheres}"></td>
+					<td data-th-text="${articleAVendre.prixInitial}"></td>
 				</tr>
 			</tbody>
 		</table>
+
+<!--		<div class="card" data-th-each="articleAVendre : ${articleAV}">-->
+<!--			<img data-th-src="@{images/img_default.png}" alt="image du produit" height="200" width="200">-->
+<!--			<div class="container">-->
+<!--				<hr>-->
+
+<!--				<h4><b data-th-text="${articleAVendre.nomArticle}"></b></h4>-->
+<!--				<hr>-->
+<!--				<p>Description : </p>-->
+<!--				<p data-th-text="${articleAVendre.description}"></p>-->
+<!--				<hr>-->
+<!--				<p>Statut de l'enchère : </p>-->
+<!--				<p data-th-text="${articleAVendre.statut}"></p>-->
+<!--				<hr>-->
+<!--				<p>Date de fin de l'enchère : </p>-->
+<!--				<p data-th-text="${articleAVendre.dateFinEncheres}"></p>-->
+<!--				<hr>-->
+<!--				<p></p>-->
+<!--				<p>Prix initial : </p>-->
+<!--				<p data-th-text="${articleAVendre.prixInitial}"></p>-->
+<!--			</div>-->
+<!--		</div>-->
+
+
+
+
+
+
 	</main>
 </body>
 </html>

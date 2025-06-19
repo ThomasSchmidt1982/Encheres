@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	data-th-replace="~{layouts/layout :: layout-enchere(titrePage=~{:: title}, contenuPage=~{:: main}, ressourcesSupp=~{:: #ressources-css})}">
+
+<head>
+
+<title>Utilisateur</title>
+
+<!-- Css spécifique à cette page // il sera ajouté dans le layout -->
+<th:block id="ressources-css">
+	<link rel="stylesheet" data-th-href="@{/css/table.css}">
+	<link rel="stylesheet" data-th-href="@{/css/form.css}">
+	<link rel="stylesheet" data-th-href="@{/css/card.css}">
+</th:block>
+
+</head>
+<body>
+	<main>
+		<h1>Information de profil</h1>
+
+		<div class="card">
+			<div>
+				<h1 data-th-text="${profilUtilisateur.pseudo}"></h1>
+				<hr>
+				<article data-th-text="${profilUtilisateur.prenom}"></article>
+				<hr>
+				<article data-th-text="${profilUtilisateur.nom}"></article>
+				<hr>
+				<article data-th-text="${profilUtilisateur.email}"></article>
+				<hr>
+				<article data-th-text="${profilUtilisateur.telephone}"></article>
+				<hr>
+				<article data-th-text="${profilUtilisateur.credit}"></article>
+				<hr>
+				<article data-th-text="${profilUtilisateur.adresse.rue}"></article>
+				<hr>
+				<article data-th-text="${profilUtilisateur.adresse.codePostal}"></article>
+				<hr>
+				<article data-th-text="${profilUtilisateur.adresse.ville}"></article>
+
+			</div>
+		</div>
+
+	</main>
+</body>
+</html>

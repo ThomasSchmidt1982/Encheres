@@ -1,7 +1,6 @@
 package fr.eni.projet.encheres.bo;
 
 import jakarta.validation.constraints.*;
-import org.springframework.beans.factory.annotation.Value;
 
 public class Utilisateur {
 

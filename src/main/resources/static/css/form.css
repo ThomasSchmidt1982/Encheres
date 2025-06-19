@@ -101,3 +101,51 @@ form h1 {
 .button-group .button:hover {
 	opacity: 0.9;
 }
+
+.form-container {
+	border: 2px solid #ccc;
+	border-radius: 10px;
+	padding: 20px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	background-color: #fff;
+	margin: 20px auto;
+	max-width: 1000px;
+}
+
+.form-columns {
+	background-color: #f9f9f9;
+	border: 1px solid #e1e1e1;
+	border-radius: 5px;
+	padding: 20px;
+	margin-bottom: 20px;
+}
+
+.button-group {
+	border-top: 1px solid #e1e1e1;
+	margin-top: 20px;
+	padding-top: 20px;
+}
+
+/* Style pour les groupes de champs */
+.flex-outer {
+	background-color: white;
+	padding: 15px;
+	border-radius: 5px;
+	border: 1px solid #ddd;
+}
+
+/* Style pour les champs d'adresse */
+.address-fields {
+	border: 1px solid #e1e1e1;
+	padding: 15px;
+	border-radius: 5px;
+	background-color: #f5f5f5;
+}
+
+/* Style pour le titre */
+h1 {
+	/* border-bottom: 2px solid #007bff; */
+	padding-bottom: 10px;
+	margin-bottom: 20px;
+	color: #333;
+}
